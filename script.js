@@ -106,3 +106,62 @@ console.log(countSmileys([";]", ":[", ";*", ":$", ";-D"]));
 // ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // #############################################################
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 64. Consonant value - 6 kyu - codewars
+/* 
+Given a lowercase string that has alphabetic characters only and no spaces, return the highest value of consonant substrings. Consonants are any letters of the alphabet except "aeiou".
+
+We shall assign the following values: a = 1, b = 2, c = 3, .... z = 26.
+
+For example, for the word "zodiacs", let's cross out the vowels. We get: "z o d ia cs"
+
+-- The consonant substrings are: "z", "d" and "cs" and the values are z = 26, d = 4 and cs = 3 + 19 = 22. The highest is 26.
+solve("zodiacs") = 26
+
+For the word "strength", solve("strength") = 57
+-- The consonant substrings are: "str" and "ngth" with values "str" = 19 + 20 + 18 = 57 and "ngth" = 14 + 7 + 20 + 8 = 49. The highest is 57.
+For C: do not mutate input.
+
+More examples in test cases. Good luck!
+ */
+
+function solve(s) {
+    const alph = "0abcdefghijklmnopqrstuvwxyz".split("");
+    const scoredX = s.split(/[aeuio]+/gi).map((el) => {
+        let total = 0;
+        [...el].forEach((char) => {
+            total += alph.indexOf(char);
+        });
+        return total;
+    });
+
+    return Math.max(...scoredX);
+}
+
+console.log(solve("chruschtschov"));
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// #############################################################
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 65. Find the odd int -6 kyu - codewars
+/* 
+Given an array of integers, find the one that appears an odd number of times.
+
+There will always be only one integer that appears an odd number of times.
+
+ */
+function findOdd(A) {
+    const tally = A.reduce((acc, el) => {
+        acc[el] = (acc[el] || 0) + 1;
+        return acc;
+    }, {});
+
+    console.log(tally);
+    for (let key in tally) {
+        if (tally[key] % 2 === 1) return +key;
+    }
+    return 0;
+}
+
+console.log(findOdd([20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5]));
