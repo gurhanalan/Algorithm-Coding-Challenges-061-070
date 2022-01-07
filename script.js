@@ -165,3 +165,46 @@ function findOdd(A) {
 }
 
 console.log(findOdd([20, 1, -1, 2, -2, 3, 3, 5, 5, 1, 2, 4, 20, 4, -1, -2, 5]));
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// #############################################################
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 66. String incrementer - 5 kyu - codewars
+
+/* Your job is to write a function which increments a string, to create a new string.
+
+If the string already ends with a number, the number should be incremented by 1.
+If the string does not end with a number. the number 1 should be appended to the new string.
+
+Examples:
+
+foo -> foo1
+
+foobar23 -> foobar24
+
+foo0042 -> foo0043
+
+foo9 -> foo10
+
+foo099 -> foo100
+
+Attention: If the number has leading zeros the amount of digits should be considered. */
+
+function incrementString(str) {
+    let txtStr = str.match(/^[a-zA-Z]+/) ? str.match(/^[a-zA-Z]+/)[0] : "";
+    // "" and no number "foo"  => 1, foo1
+    if (str.length < 1 || txtStr.length == str.length) return str + "1";
+
+    // Problem !! foo099 -> foo100  foo0042 -> foo0043 etc.
+    let num = str.match(/\d+$/)[0];
+
+    // for foo23 foo9 etc.
+    let numStr = +str.match(/\d+$/)[0] + 1 + "";
+    console.log(num, numStr);
+    if (num.length > numStr.length) numStr = numStr.padStart(num.length, "0");
+    // console.log(txtStr, numStr);
+    return txtStr + numStr;
+    // return incrementedString
+}
+console.log(incrementString("9")); //"foobar001"  foo099 -> foo100
