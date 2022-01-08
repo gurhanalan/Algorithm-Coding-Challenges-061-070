@@ -208,3 +208,34 @@ function incrementString(str) {
     // return incrementedString
 }
 console.log(incrementString("9")); //"foobar001"  foo099 -> foo100
+
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// #############################################################
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// 67. Highest Rank Number in an Array - codewars -6 kyu
+/* 
+Complete the method which returns the number which is most frequent in the given input array. If there is a tie for most frequent number, return the largest number among them.
+
+Note: no empty arrays will be given.
+
+Examples
+[12, 10, 8, 12, 7, 6, 4, 10, 12]              -->  12
+[12, 10, 8, 12, 7, 6, 4, 10, 12, 10]          -->  12
+[12, 10, 8, 8, 3, 3, 3, 3, 2, 4, 10, 12, 10]  -->   3
+ */
+function highestRank(arr) {
+    const tally = arr.reduce((acc, el) => {
+        acc[el] = (acc[el] || 0) + 1;
+        return acc;
+    }, {});
+    const maxCount = Math.max(...Object.values(tally));
+    const maxCountNums = [];
+
+    for (let [key, value] of Object.entries(tally)) {
+        if (value === maxCount) maxCountNums.push(key);
+    }
+    return Math.max(...maxCountNums);
+}
+
+console.log(highestRank([12, 10, 8, 12, 7, 6, 4, 10, 12]));
